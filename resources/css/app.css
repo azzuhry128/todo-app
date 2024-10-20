@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .navbar-menu {
+        @apply hover:text-[#fca311] transition duration-300 ease-in-out;
+    }
+}

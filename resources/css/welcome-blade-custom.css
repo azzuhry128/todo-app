@@ -1,0 +1,3 @@
+#menu {
+    @apply hover:text-[#fca311] transition duration-300 ease-in-out;
+}
