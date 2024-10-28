@@ -41,6 +41,11 @@ class Sidebar extends Component
         $this->createdGroups = Group::all();
     }
 
+    #[On("refresh-sidebar")]
+    public function refreshSidebar() {
+        $this->createdGroups = Group::all();
+    }
+
 
     public function render()
     {

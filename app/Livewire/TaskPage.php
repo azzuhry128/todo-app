@@ -38,6 +38,36 @@ class TaskPage extends Component
         $this->tasks = Todo::all();
     }
 
+    public function deleteGroup() {
+        $groupID= $this->findGroupID($this->currentGroup);
+        $groupRelatedTaskID = $this->findAllGroupRelatedTask($this->groupID);
+
+        // dd($groupRelatedTaskID['group_id_fk']);
+        if (!$groupRelatedTaskID) {
+            Group::where('id', $groupID)->delete();
+        } else {
+            Todo::where('id', $groupRelatedTaskID)->delete();
+            Group::where('id', $groupID)->delete();
+        }
+
+        $this->groups = Group::all();
+        $this->tasks = Todo::all();
+        $this->dispatch("refresh-sidebar");
+    }
+
+    public function findGroupID($groupName) {
+        $groupID = collect($this->groups)->firstWhere('group_name', $groupName)['id'];
+        return $groupID;
+    }
+
+    public function findAllGroupRelatedTask($groupID) {
+        $results = collect($this->tasks)->firstWhere('group_id_fk', $groupID);
+        if (!$results) {
+            return;
+        }
+
+        return $results;
+    }
 
     public function dynamicGroupNameHandler() {
         // dd("it works");

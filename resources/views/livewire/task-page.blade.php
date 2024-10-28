@@ -6,7 +6,12 @@
         @if ($currentGroupType == "static")
             <h1 class="font-medium text-3xl p-2 capitalize">{{$currentGroup}}</h1>
         @else
-            <input type="text" wire:model.blur="dynamicGroupName" wire:blur="dynamicGroupNameHandler" class="font-medium max-w-max text-3xl p-2 capitalize focus:outline-none focus:border-none" placeholder="{{$currentGroup}}"/>
+            <div class="flex justify-between">
+                <input type="text" wire:model.blur="dynamicGroupName" wire:blur="dynamicGroupNameHandler" class="font-medium max-w-max text-3xl p-2 capitalize focus:outline-none focus:border-none" placeholder="{{$currentGroup}}"/>
+                <button wire:click="deleteGroup" class="text-red-500 p-2 h-12 rounded border-red-500 border hover:bg-red-500 hover:text-white font-medium capitalize transition ease-in-out duration-300">
+                    delete group
+                </button>
+            </div>
         @endif
 
         <div class="h-max flex flex-col gap-2 mt-4">
